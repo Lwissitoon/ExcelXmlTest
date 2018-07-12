@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+					
+public class Program
+{
+	public static void Main()
+	{
+	//	Console.WriteLine("Hello World");
+		List<string> PPart= new List<string>();
+		List<string> PPart2= new List<string>();
+		List<string> Com= new List<string>();
+		
+		PPart.Add("Crear");
+	    PPart.Add("Abrir");
+		PPart.Add("Click");
+		
+		PPart2.Add("Cambiar");
+	    PPart2.Add("Eliminar");
+		PPart2.Add("Actualizar");
+		
+		
+		
+		for(int i=0;i<PPart.Count;i++)
+		{
+			for(int j=0;j<PPart2.Count;j++)
+			{
+			Com.Add(PPart.ElementAt(i)+" "+PPart2.ElementAt(j));
+			}
+		}
+		
+
+			for(int i=0;i<Com.Count;i++)
+			{
+				
+				Console.WriteLine(Com.ElementAt(i));
+			}
+	}
+}
