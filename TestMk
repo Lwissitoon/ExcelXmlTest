@@ -1,39 +1,59 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-					
-public class Program
-{
-	public static void Main()
-	{
-	//	Console.WriteLine("Hello World");
-		List<string> PPart= new List<string>();
-		List<string> PPart2= new List<string>();
-		List<string> Com= new List<string>();
-		
-		PPart.Add("Crear");
-	    PPart.Add("Abrir");
-		PPart.Add("Click");
-		
-		PPart2.Add("Cambiar");
-	    PPart2.Add("Eliminar");
-		PPart2.Add("Actualizar");
-		
-		
-		
-		for(int i=0;i<PPart.Count;i++)
-		{
-			for(int j=0;j<PPart2.Count;j++)
-			{
-			Com.Add(PPart.ElementAt(i)+" "+PPart2.ElementAt(j));
-			}
-		}
-		
+using System.Text;
+using System.Threading.Tasks;
 
-			for(int i=0;i<Com.Count;i++)
-			{
-				
-				Console.WriteLine(Com.ElementAt(i));
-			}
-	}
+namespace CombinacionDeListas
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<List<string>> Listas = new List<List<string>>();
+
+            List<string> Nums1 = new List<string>(new string[] { "6", "76", "5", "5", "6" });
+            List<string> Nums2 = new List<string>(new string[] { "6", "4", "7", "5","9" });
+            List<string> Nums3 = new List<string>(new string[] { "22", "11", "5", "4", "6" });
+
+            List<string> Joiner = new List<string>();
+            List<string> controller = new List<string>();
+            List<string> controller2 = new List<string>();
+            //Joiner = Nums1.ToList();
+ 
+
+            Listas.Add(Nums1);
+            Listas.Add(Nums2);
+            Listas.Add(Nums3);
+
+            for (int i = 0; i < Listas.Count; i++)
+            {
+                for (int j = 0; j < Listas.ElementAt(i).Count; j++)
+                {
+                   // var count = Listas.ElementAt(i).ElementAt(j).Count();
+                    if (i==0)
+                    {   
+                        controller.Add(Listas.ElementAt(i).ElementAt(j));
+                    }
+                    else
+                    {
+                        for (int x = 0; x < Listas.ElementAt(i).ElementAt(j).Count(); x++)
+                        {
+                            controller2.Add(controller.ElementAt(x) + " " + Listas.ElementAt(i).ElementAt(j));
+                        }
+                        controller.Clear();
+                        controller = controller2.ToList();
+                        controller2.Clear();
+                    }
+                    
+                }
+            }
+
+            foreach (var item in controller)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadKey();
+        }
+    }
 }
