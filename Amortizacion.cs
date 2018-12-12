@@ -36,7 +36,7 @@ namespace Financiera_apps
             Console.WriteLine("Balance | Interes | Amortizacion | Renta");
 
 
-            for (int i = 0; i < periodos; i++)
+            do
             {
 
 
@@ -52,15 +52,20 @@ namespace Financiera_apps
 
                 if (balance < renta)
                 {
- 
-                    interes = Math.Round( balance * (TasaInteres),2);
-                    renta = Math.Round(balance + interes,2);
+
+                    interes = Math.Round(balance * (TasaInteres), 2);
+                    renta = Math.Round(balance + interes, 2);
                     amortizacion = Math.Round(renta - interes, 2);
+                    balance = balance - balance;
                     Console.WriteLine(balance + " | " + interes + " | " + amortizacion + " | " + renta);
+
                     break;
                 }
-
             }
+            while (balance > 0);
+
+
+            
             Console.ReadKey();
 
         }
