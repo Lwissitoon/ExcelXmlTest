@@ -11,7 +11,7 @@ namespace Financiera_apps
 
         public static double GetRenta(double balance, double tasaInteres, int periodos)
         {
-            return Math.Round((balance / ((1 - (Math.Pow((1 + tasaInteres), -periodos))) / tasaInteres)), 2)+0.01;
+            return Math.Round((balance / ((1 - (Math.Pow((1 + tasaInteres), -periodos))) / tasaInteres)), 2) + 0.01;
 
         }
         static void Main(string[] args)
@@ -41,7 +41,7 @@ namespace Financiera_apps
             for (int i = 0; i < periodosComp; i++)
             {
 
-            
+
                 if (balance > renta)
                 {
                     interes = Math.Round(balance * (TasaInteres), 2);
@@ -52,9 +52,9 @@ namespace Financiera_apps
                     Console.WriteLine(balance + " | " + interes + " | " + amortizacion + " | " + renta);
                 }
 
-           }
+            }
 
-            Console.WriteLine("Balance2: "+balance);
+            Console.WriteLine("Balance2: " + balance);
             renta = GetRenta(balance, TasaInteres, nuevoPeriodo);
             for (int i = 0; i < nuevoPeriodo; i++)
             {
@@ -72,11 +72,13 @@ namespace Financiera_apps
 
                 if (balance < renta)
                 {
- 
-                    interes = Math.Round( balance * (TasaInteres),2);
-                    renta = Math.Round(balance + interes,2);
+
+                    interes = Math.Round(balance * (TasaInteres), 2);
+                    renta = Math.Round(balance + interes, 2);
                     amortizacion = Math.Round(renta - interes, 2);
+                    balance = balance - balance;
                     Console.WriteLine(balance + " | " + interes + " | " + amortizacion + " | " + renta);
+
                     break;
                 }
 
