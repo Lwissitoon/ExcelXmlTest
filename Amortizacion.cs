@@ -11,25 +11,23 @@ namespace Financiera_apps
 
         public static double GetRenta(double balance, double tasaInteres, int periodos)
         {
-            return Math.Round((balance / ((1 - (Math.Pow((1 + tasaInteres), -periodos))) / tasaInteres)), 2);
+            return Math.Round((balance / ((1 - (Math.Pow((1 + tasaInteres), -periodos))) / tasaInteres)), 2)+0.01;
 
         }
-        static void Main2(string[] args)
+        static void Main(string[] args)
         {
             double TasaInteres = 0.03;
-            double interes=0;
-            double amortizacion=0;
+            double interes = 0;
+            double amortizacion = 0;
             double balance = 500;
-            double renta=0;
+            double renta = 0;
             int periodos = 12;
 
             /*
                         Console.WriteLine("Tasa de Interes:");
                         TasaInteres = double.Parse(Console.ReadLine());
-
                         Console.WriteLine("Balance");
                         balance = double.Parse(Console.ReadLine());
-
                         Console.WriteLine("Cantidad de periodos");
                         periodos = int.Parse(Console.ReadLine());
             */
@@ -38,8 +36,10 @@ namespace Financiera_apps
             Console.WriteLine("Balance | Interes | Amortizacion | Renta");
 
 
-            do
+            for (int i = 0; i < periodos; i++)
             {
+
+
                 if (balance > renta)
                 {
                     interes = Math.Round(balance * (TasaInteres), 2);
@@ -49,19 +49,18 @@ namespace Financiera_apps
 
                     Console.WriteLine(balance + " | " + interes + " | " + amortizacion + " | " + renta);
                 }
+
                 if (balance < renta)
                 {
-                    renta = balance;
-                    balance = balance - renta;
-                    interes = renta - amortizacion;
+ 
+                    interes = Math.Round( balance * (TasaInteres),2);
+                    renta = Math.Round(balance + interes,2);
+                    amortizacion = Math.Round(renta - interes, 2);
                     Console.WriteLine(balance + " | " + interes + " | " + amortizacion + " | " + renta);
                     break;
                 }
 
             }
-            while (balance != 0);
-
-
             Console.ReadKey();
 
         }
