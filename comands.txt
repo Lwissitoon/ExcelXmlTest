@@ -1,0 +1,157 @@
+Configure la interfaz VLAN 1 en S2 con la segunda dirección disponible en la red. Asegúrese de activar la interfaz.  
+S2(config)# interface vlan 1:
+S2(config-if)# ip address 192.168.11.2 255.255.255.0
+S2(config-if)# no shutdown:
+%LINK-5-CHANGED: Interface Vlan1, changed state to up
+Salga del modo de configuración de interfaz.  
+S2(config-if)# exit
+Configure el gateway predeterminado para S2.  
+S2(config)# ip default-gateway 192.168.11.1
+Configuró correctamente la SVI de administración en S2.  
+
+
+Introduzca los comandos para configurar el nombre del router como “R2”.  
+Router# configure terminal
+Enter configuration commands, one per line. End with CNTL/Z.
+Router(config)# hostname R2
+Configure “class” como contraseña secreta.  
+R2(config)# enable secret class
+Configure “cisco” como contraseña de la línea de consola y solicite a los usuarios que inicien sesión. Luego, salga del modo de configuración de línea.  
+R2(config)# line console 0
+R2(config-line)# password cisco
+R2(config-line)# login
+R2(config-line)# exit
+Configure “cisco” como contraseña de vty para las líneas 0 a 4 y solicite a los usuarios que inicien sesión.  
+R2(config)# line vty 0 4
+R2(config-line)# password cisco
+R2(config-line)# login
+Salga del modo de configuración de línea y encripte todas las contraseñas de texto no cifrado.  
+R2(config-line)# exit
+R2(config)# service password-encryption
+Introduzca el mensaje “¡Acceso autorizado únicamente!” y utilice # como carácter delimitador.  
+R2(config)# banner motd #¡Acceso autorizado únicamente!#
+Salga del modo de configuración global y guarde la configuración.  
+R2(config)# exit
+R2# copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration... 
+[OK]
+R2#
+Configuró correctamente el R2 con los parámetros iniciales
+
+
+
+
+
+
+
+
+Configure la interfaz GigabitEthernet 0/0 con la dirección IP 10.1.1.1 y la máscara de subred 255.255.255.0. Describa el enlace como “Enlace a LAN 3” y active la interfaz.  
+R2(config)# interface gigabitethernet 0/0
+R2(config-if)# ip address 10.1.1.1 255.255.255.0
+R2(config-if)# description Link to LAN 3
+R2(config-if)# no shutdown:
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+Configure la interfaz GigabitEthernet 0/1 con la dirección IP 10.1.2.1 y la máscara de subred 255.255.255.0. Describa el enlace como "Enlace a LAN 4" y active la interfaz.  
+R2(config-if)# interface gigabitethernet 0/1
+R2(config-if)# ip address 10.1.2.1 255.255.255.0
+R2(config-if)# description Link to LAN 4
+R2(config-if)# no shutdown:
+%LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+
+Configure la interfaz serial 0/0/0 con la dirección IP 209.165.200.226 y la máscara de subred 255.255.255.252. Describa el enlace como “Enlace a R1” y active la interfaz.  
+R2(config-if)# interface Serial 0/0/0
+R2(config-if)# ip address 209.165.200.226 255.255.255.252
+R2(config-if)# description Link to R1
+R2(config-if)# no shutdown:
+%LINK-5-CHANGED: Interface Serial0/0/0, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0/0, changed state to up
+
+Configuró correctamente las interfaces del router R2.  
+
+
+
+
+Configure la interfaz GigabitEthernet 0/0 con la dirección IPv6 2001:db8:acad:4::1/64. Describa el enlace como “Enlace a LAN 3” y active la interfaz.  
+R2(config)# interface gigabitethernet 0/0
+R2(config-if)# ipv6 address 2001:db8:acad:4::1/64
+R2(config-if)# description Link to LAN 3
+R2(config-if)# no shutdown:
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+Configure la interfaz GigabitEthernet 1/0 con la dirección IPv6 2001:db8:acad:5::1/64. Describa el enlace como “Enlace a LAN 4” y active la interfaz.  
+R2(config-if)# interface gigabitethernet 0/1
+R2(config-if)# ipv6 address 2001:db8:acad:5::1/64
+R2(config-if)# description Link to LAN 4
+R2(config-if)# no shutdown:
+%LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+Configure la interfaz serial 0/0/0 con la dirección IP 2001:db8:acad:3::2/64. Describa el enlace como “Enlace a R1” y active la interfaz.  
+R2(config-if)# interface Serial 0/0/0
+R2(config-if)# ip address 2001:db8:acad:3::2/64
+R2(config-if)# description Link to R1
+R2(config-if)# no shutdown:
+%LINK-5-CHANGED: Interface Serial0/0/0, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0/0, changed state to up
+
+Configuró correctamente las interfaces IPv6 del router R2.  
+
+
+
+
+-show ipv6 interface brief
+-show ipv6 interface gigabitethernet 0/0
+-show ipv6 route
+-show interfaces
+-show ipv6 routers
+
+
+
+
+
+Introduzca el comando para filtrar el resultado del comando show running-config para la sección 'line con'.  
+R1# show running-config | section line con
+line con 0
+ password 7 110A1016141D
+ login
+Introduzca el comando para filtrar las interfaces con estado “down” (inactivo) en la lista resumida.  
+R1# show ip interface brief | include down
+Embedded-Service-Engine0/0 unassigned YES unset
+administratively down down 
+Serial0/0/1 unassigned YES unset  
+administratively down down
+Introduzca el comando para excluir las interfaces con estado “up” (activo) en la lista resumida.  
+R1# show ip interface brief | exclude up
+Interface IP-Address OK? Method 
+Status Protocol
+Embedded-Service-Engine0/0 unassigned YES unset  
+administratively down down    
+Serial0/0/1 unassigned YES unset  
+administratively down down 
+Introduzca el comando para filtrar el resultado del comando show running-config para que comience desde la palabra “line”.  
+R1# show running-config | begin line
+line con 0 
+ password 7 110A1016141D 
+ login 
+line aux 0 
+line 2 
+ no activation-character 
+ no exec 
+ transport preferred none 
+ transport input all 
+ transport output pad telnet rlogin lapb-ta mop udptn v120 
+ssh 
+ stopbits 1 
+line vty 0 4 
+ password 7 030752180500 
+ login 
+ transport input all 
+!  
+scheduler allocate 20000 1000 
+!  
+Final 
+ 
+R1#  
+Ejecutó correctamente los comandos show filtrados.  
